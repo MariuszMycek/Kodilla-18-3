@@ -84,12 +84,14 @@ var Movie = React.createClass({
   }
 });
 
-var moviesElements = movies.map(function(movie) {
-  return React.createElement(Movie, { key: movie.id, movie: movie });
-});
-
 var MoviesList = React.createClass({
+  propTypes: {
+    movies: React.PropTypes.array.isRequired
+  },
   render: function() {
+    var moviesElements = this.props.movies.map(function(movie) {
+      return React.createElement(Movie, { key: movie.id, movie: movie });
+    });
     return React.createElement(
       "div",
       {},
@@ -99,5 +101,5 @@ var MoviesList = React.createClass({
   }
 });
 
-var element = React.createElement(MoviesList, {});
+var element = React.createElement(MoviesList, { movies: movies });
 ReactDOM.render(element, document.getElementById("app"));
